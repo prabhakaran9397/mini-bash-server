@@ -1,0 +1,19 @@
+#!/bin/bash
+
+while true
+do
+	echo > collections
+	for i in $(cat .test | awk '{if($9==200) print $7}' | grep '^/?' | sed 's/^\/?//g' | sed 's/\/$//g')
+	do
+		array=${i//&/ }
+		for j in ${array[@]}
+		do
+			v=$(echo -e $(echo $j | sed 's/%/\\x/g'))
+			echo -n "[$v]" >> collections
+		done
+		echo >> collections
+	done
+	sort -u collections -o collections
+	cat collections
+	sleep 3
+done

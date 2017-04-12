@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./action &
+
+python -m SimpleHTTPServer $1 2> .test
